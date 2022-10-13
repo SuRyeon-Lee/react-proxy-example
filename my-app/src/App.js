@@ -4,7 +4,7 @@ import Header from './components/Header';
 import BookTable from './components/BookTable';
 import DisplayBoard from './components/DisplayBoard';
 import CreateBook from './components/CreateBook';
-import { getAllBooks, createBook } from './services/BookService';
+import { getAllBooks, createBook, getAllTodos } from './services/BookService';
 import Footer from './components/Footer';
 
 function App () {
@@ -22,6 +22,14 @@ function App () {
 
   const getAllBook = () => {
     getAllBooks()
+      .then(data => {
+        setBooks(data);
+        setNumberBooks(data.length);
+      });
+  }
+
+  const getAllTodo = () => {
+    getAllTodos()
       .then(data => {
         setBooks(data);
         setNumberBooks(data.length);
@@ -53,6 +61,7 @@ function App () {
         <DisplayBoard 
           numberOfBooks={numberOfBooks} 
           getAllBook={getAllBook} 
+          getAllTodo={getAllTodo}
         />
         <BookTable books={books} />
         <Footer />
